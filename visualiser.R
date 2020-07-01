@@ -73,7 +73,7 @@ frames_for_30_secs <- smps_per_sec * 30 # Samples for just first 30 seconds
 
 left_short <- left %>%
   filter(samples <= frames_for_30_secs) %>%
-  filter(row_number() %% 10 == 0) # Retain every 10th row as raw data is too large
+  filter(row_number() %% 100 == 0) # Retain every 100th row as raw data is too large
 
 # Integer version for animation
 
@@ -98,13 +98,12 @@ dev.off()
 # Produce graphic
 
 p3 <- left_short %>%
-  ggplot(aes(x = samples, y = amplitude, group = seq_along(samples))) +
+  ggplot(aes(x = samples, y = amplitude)) +
   background_image(img_crop) +
-  geom_line(colour = "#F9B8B1", alpha = 0.2) +
-  labs(group = NULL) +
-  theme(legend.position = "none") +
+  geom_line(colour = "#F9B8B1", alpha = 0.9) +
   theme_void() +
   transition_reveal(samples) +
   ease_aes('linear')
 
-animate(p3, nframes = int_frames, fps = int_fps, duration = 30)
+animate(p3, duration = 30,
+        width = 600, height = 600)
