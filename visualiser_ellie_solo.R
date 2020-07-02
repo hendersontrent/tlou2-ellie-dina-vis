@@ -46,7 +46,7 @@ left <- as.data.frame(leftside) %>%
 
 #----------------DATA VISUALISATION-------
 
-# Read in picture of Ellie and Dina
+# Read in picture of Ellie
 
 img <- readJPEG("data/ellie-solo.jpeg")
 
@@ -61,7 +61,7 @@ the_max <- max(left$samples) # Highest sample number
 the_duration <- 180 # Number of seconds of audio
 smps_per_sec <- the_max / the_duration # Sample rate
 frames_for_6_secs <- smps_per_sec * 6 # Samples for just first 6 seconds
-frames_for_36_secs <- smps_per_sec * 30 # Samples for just first 36 seconds
+frames_for_36_secs <- smps_per_sec * 36 # Samples for just first 36 seconds
 
 left_short <- left %>%
   filter(samples >= frames_for_6_secs & samples <= frames_for_36_secs) %>%
